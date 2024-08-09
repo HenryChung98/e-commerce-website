@@ -1,0 +1,60 @@
+{% extends "ecommerce_base/base.html" %} {% load static %} {% block css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'ecommerce/styles/signup.css' %}"
+/>
+{% endblock css %} {% block content %}
+<form method="post">
+  {% csrf_token %}
+
+    <label for="id_email">Email:</label>
+    {{ form.email }}
+
+    <br />
+
+    <label for="id_password1">Password:</label>
+    {{ form.password1 }}
+
+    <br />
+
+    <label for="id_password2">Confirm Password:</label>
+    {{ form.password2 }}
+
+    <br />
+
+  <label for="id_firstName">First Name:</label>
+  {{ form.firstName }}
+  <br />
+
+  <label for="id_lastName">Last Name:</label>
+  {{ form.lastName }}
+  <br />
+
+  <label for="id_nickname">Nickname:</label>
+  {{ form.nickname }}
+  <br />
+
+  <label for="id_address">Address:</label>
+  {{ form.address }}
+  <br />
+
+  <label for="id_city">City:</label>
+  {{ form.city }}
+  <br />
+
+  <label for="id_country">Country:</label>
+  {{ form.country }}
+  <br />
+
+  <label for="id_province">Province:</label>
+  {{ form.province }}
+  <br />
+
+  <label for="id_postalCode">Postal Code:</label>
+  {{ form.postalCode }}
+  <br />
+
+  <button type="submit">sign up</button>
+</form>
+{% endblock content %}

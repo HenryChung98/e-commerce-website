@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    {% block css %}
+    {% endblock css %}
+
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'ecommerce/favicon/favicon.svg' %}"
+    />
+
+    <title>{% block title %}e-commerce{% endblock title %}</title>
+  </head>
+  <body>
+    {% block header %}
+    <header>header</header>
+    <nav>
+      <ul>
+        <a href="{% url 'index' %}"><li>home</li></a>
+        <a href="{% url 'item-list' %}"><li>items</li></a>
+        <a href="{% url 'user-profile' %}"><li>profile</li></a>
+      </ul>
+    </nav>
+    {% endblock header %} 
+    
+    {% block content %}{% endblock content %} 
+
+    {% block footer %}
+    <footer>footer</footer>
+    {% endblock footer %}
+  </body>
+</html>
