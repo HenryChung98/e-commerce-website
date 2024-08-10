@@ -1,7 +1,7 @@
 from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
-from .models import User
+from .models import User, Item, Order, OrderItem, Cart, CartItem, Review
 
     
 class SignupForm(forms.ModelForm):
@@ -23,3 +23,25 @@ class SignupForm(forms.ModelForm):
         user.postalCode = self.cleaned_data["postalCode"]
         user.save()
 
+
+class ReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = Review
+        fields = '__all__'
+
+
+class OrderForm(forms.ModelForm):
+
+    class Meta:
+        model = Order
+        fields = [
+            'firstName', 
+            'lastName', 
+            'email', 
+            'address', 
+            'city',
+            'province',
+            'postalCode', 
+        ]
+        

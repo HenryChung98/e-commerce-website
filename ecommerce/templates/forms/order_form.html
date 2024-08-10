@@ -1,0 +1,40 @@
+{% extends "ecommerce_base/base.html" %}
+{% load static %}
+
+{% block content %}
+<h2>Order Form</h2>
+{% if cart_items %}
+{% for item in cart_items %}
+{{item.item_name}} -&gt; {{item.quantity}} * {{item.price}}
+{% endfor %}
+<br />
+total: {{ total|floatformat:2 }}
+{% endif %}
+
+<form method="post">{% csrf_token %}
+    {{ form.non_field_errors }}
+    
+    <label for="id_firstName">First Name:</label><br />
+    {{ form.firstName }}<br />
+    
+    <label for="id_lastName">Last Name:</label><br />
+    {{ form.lastName }}<br />
+    
+    <label for="id_email">Email:</label><br />
+    {{ form.email }}<br />
+    
+    <label for="id_address">Address:</label><br />
+    {{ form.address }}<br />
+    
+    <label for="id_city">City:</label><br />
+    {{ form.city }}<br />
+    
+    <label for="id_province">Province:</label><br />
+    {{ form.province }}<br />
+    
+    <label for="id_postalCode">Postal Code:</label><br />
+    {{ form.postalCode }}<br />
+    
+    <input type="submit" value="Order" />
+</form>
+{% endblock content %}

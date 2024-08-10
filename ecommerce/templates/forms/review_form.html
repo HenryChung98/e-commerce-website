@@ -1,0 +1,10 @@
+{% extends "ecommerce_base/base.html" %}
+{% load static %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    {{ form.rate }}<br /><br />
+    {{ form.comment }}
+    <input type="submit" value="Create Review" />
+</form>
+{% endblock content %}

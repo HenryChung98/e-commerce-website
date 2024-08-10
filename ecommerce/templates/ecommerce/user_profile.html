@@ -1,5 +1,29 @@
 {% extends "ecommerce_base/base.html" %}
 
 {% block content %}
-<h1>profile</h1>
+{% if user.is_authenticated %}
+{{user.id}}
+<br />
+{% if orders %}
+{% for order in orders %}
+order id: {{order.id}}<br />
+order firstname: {{order.firstName}}<br />
+order lastname: {{order.lastName}}<br />
+{% endfor %}
+{% else %}
+no ordered yet
+{% endif%}
+<br /><br />
+{% if reviews %}
+{% for review in reviews %}
+review id: {{review.id}}<br />
+review item: {{review.item}}<br />
+
+{% endfor %}
+{% else %}
+no review
+{% endif%}
+
+{% else %}
+{% endif%}
 {% endblock content %}

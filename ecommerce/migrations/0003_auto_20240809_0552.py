@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 ('lastName', models.CharField(max_length=15)),
                 ('email', models.EmailField(max_length=254)),
                 ('address', models.TextField()),
-                ('postal_code', models.CharField(max_length=20)),
+                ('postalCode', models.CharField(max_length=20)),
                 ('city', models.CharField(max_length=15)),
                 ('createdAt', models.DateTimeField(auto_now_add=True)),
                 ('updatedAt', models.DateTimeField(auto_now=True)),

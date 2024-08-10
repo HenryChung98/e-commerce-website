@@ -167,6 +167,7 @@ ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "account_email_confirmation_
 
 PASSWORD_RESET_TIMEOUT = 600 # Sets the number of seconds a password reset link remains valid.
 
+LOGIN_URL = '/login/'
 
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

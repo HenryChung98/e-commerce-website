@@ -35,7 +35,7 @@ class Item(models.Model):
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='items/images/', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='items', null=True, blank=True)
-
+    
     def __str__(self):
         return self.name
 
@@ -45,16 +45,18 @@ class Order(models.Model):
     firstName = models.CharField(max_length=15)
     lastName = models.CharField(max_length=15)
     email = models.EmailField()
-    address = models.TextField()
-    postal_code = models.CharField(max_length=20)
+    address = models.CharField(max_length=15)
     city = models.CharField(max_length=15)
+    country = CountryField(blank_label='(select country)')
+    province = models.CharField(max_length=2)
+    postalCode = models.CharField(max_length=6)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
     is_paid = models.BooleanField(default=False)
     paymentId = models.CharField(max_length=15, blank=True, null=True)
 
     def __str__(self):
-        return f'Order {self.id} by {self.first_name} {self.last_name}'
+        return f'Order {self.id} by {self.firstName} {self.lastName}'
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')

@@ -1,0 +1,20 @@
+{% extends "ecommerce_base/base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% if cart %}
+
+{% for item in cart_items %}
+
+{{ item.item }}
+{{ item.quantity }} * {{ item.price }}
+
+{% endfor %}
+<br />
+total: {{ total }}
+<a href="{% url 'order-form' %}">Order now</a>
+{% else %}
+no item in cart
+{% endif %}
+{% endblock content %}

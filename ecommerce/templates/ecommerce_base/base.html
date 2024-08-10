@@ -27,7 +27,10 @@
       <ul>
         <a href="{% url 'index' %}"><li>home</li></a>
         <a href="{% url 'item-list' %}"><li>items</li></a>
-        <a href="{% url 'user-profile' %}"><li>profile</li></a>
+        <a href="{% url 'cart-list' %}"><li>cart</li></a>
+        {% if user.id %}
+          <a href="{% url 'user-profile' user.id %}"><li>profile</li></a>
+        {% endif %}
       </ul>
     </nav>
     {% endblock header %} 
