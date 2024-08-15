@@ -45,3 +45,10 @@ class OrderForm(forms.ModelForm):
             'postalCode', 
         ]
         
+
+class PaymentForm(forms.Form):
+    name_on_card = forms.CharField(max_length=100, label="Name on Card")
+    card_number = forms.CharField(max_length=16, label="Card Number")
+    expiry_month = forms.CharField(max_length=2, label="Expiry Month (MM)")
+    expiry_year = forms.CharField(max_length=4, label="Expiry Year (YYYY)")
+    cvc = forms.CharField(max_length=4, label="CVC")

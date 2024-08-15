@@ -5,36 +5,72 @@
 <h2>Order Form</h2>
 {% if cart_items %}
 {% for item in cart_items %}
-{{item.item_name}} -&gt; {{item.quantity}} * {{item.price}}
+{{ item.item_name }} -&gt; {{ item.quantity }} * {{ item.price }}
+<br />
 {% endfor %}
 <br />
 total: {{ total|floatformat:2 }}
 {% endif %}
 
-<form method="post">{% csrf_token %}
-    {{ form.non_field_errors }}
-    
+<form method="post">
+    {% csrf_token %}
+
     <label for="id_firstName">First Name:</label><br />
-    {{ form.firstName }}<br />
-    
+    {{ form.firstName }}
+    {% if form.firstName.errors %}
+    <div class="error">{{ form.firstName.errors }}</div>
+    {% endif %}
+    <br />
+
     <label for="id_lastName">Last Name:</label><br />
-    {{ form.lastName }}<br />
-    
+    {{ form.lastName }}
+    {% if form.lastName.errors %}
+    <div class="error">{{ form.lastName.errors }}</div>
+    {% endif %}
+    <br />
+
     <label for="id_email">Email:</label><br />
-    {{ form.email }}<br />
-    
+    {{ form.email }}
+    {% if form.email.errors %}
+    <div class="error">{{ form.email.errors }}</div>
+    {% endif %}
+    <br />
+
     <label for="id_address">Address:</label><br />
-    {{ form.address }}<br />
-    
+    {{ form.address }}
+    {% if form.address.errors %}
+    <div class="error">{{ form.address.errors }}</div>
+    {% endif %}
+    <br />
+
+    <label for="id_country">Country:</label><br />
+    {{ form.country }}
+    {% if form.country.errors %}
+    <div class="error">{{ form.country.errors }}</div>
+    {% endif %}
+    <br />
+
     <label for="id_city">City:</label><br />
-    {{ form.city }}<br />
-    
+    {{ form.city }}
+    {% if form.city.errors %}
+    <div class="error">{{ form.city.errors }}</div>
+    {% endif %}
+    <br />
+
     <label for="id_province">Province:</label><br />
-    {{ form.province }}<br />
-    
+    {{ form.province }}
+    {% if form.province.errors %}
+    <div class="error">{{ form.province.errors }}</div>
+    {% endif %}
+    <br />
+
     <label for="id_postalCode">Postal Code:</label><br />
-    {{ form.postalCode }}<br />
-    
+    {{ form.postalCode }}
+    {% if form.postalCode.errors %}
+    <div class="error">{{ form.postalCode.errors }}</div>
+    {% endif %}
+    <br />
+
     <input type="submit" value="Order" />
 </form>
 {% endblock content %}

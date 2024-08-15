@@ -1,0 +1,58 @@
+{% extends "ecommerce_base/base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- templates/payment_form.html -->
+<form action="{% url 'process_payment' %}" method="post" id="payment-form">
+    {% csrf_token %}
+
+
+    <!-- Stripe Elements가 카드 정보를 수집합니다. -->
+    <div id="card-element">
+        {{ form.as_p }}
+    </div>
+
+    <!-- 카드 오류를 표시할 영역 -->
+    <div id="card-errors" role="alert"></div>
+
+    <button type="submit">Pay Now</button>
+</form>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe('pk_test_51PnoJKLXuXyUTOdP4l2B0TNCaH3WIWdRK0yOXsnGfxfNv1N0UYLWYNytr6CTsJFe5c6bCy7gMU7Kv5o09azlMj7y004OtXrsiz');  // Stripe의 Publishable Key
+    var elements = stripe.elements();
+
+    var card = elements.create('card');
+    card.mount('#card-element');
+
+    // 폼이 제출되면 Stripe가 처리하도록 설정합니다.
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        stripe.createToken(card).then(function(result) {
+            if (result.error) {
+                // 오류를 #card-errors에 표시합니다.
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                // Stripe 토큰을 서버로 전송합니다.
+                stripeTokenHandler(result.token);
+            }
+        });
+    });
+
+    function stripeTokenHandler(token) {
+        var form = document.getElementById('payment-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+
+        // 폼을 제출합니다.
+        form.submit();
+    }
+</script>
+{% endblock content %}

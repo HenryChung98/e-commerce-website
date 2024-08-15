@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_countries.fields import CountryField
-from .validators import validate_no_special_characters
+from .validators import *
 
 class User(AbstractUser):
-    firstName = models.CharField(max_length=15)
-    lastName = models.CharField(max_length=15)
+    firstName = models.CharField(max_length=15, validators=[validate_no_numbers, validate_no_special_characters])
+    lastName = models.CharField(max_length=15, validators=[validate_no_numbers, validate_no_special_characters])
     nickname = models.CharField(
         max_length=15, 
         unique=True, 
@@ -15,11 +15,11 @@ class User(AbstractUser):
             "unique": "A user is already registered with this nickname."
         }
     )
-    address = models.CharField(max_length=15)
-    city = models.CharField(max_length=15)
+    address = models.CharField(max_length=15, validators=[validate_no_special_characters])
+    city = models.CharField(max_length=15, validators=[validate_no_special_characters, validate_no_numbers])
     country = CountryField(blank_label='(select country)')
-    province = models.CharField(max_length=2)
-    postalCode = models.CharField(max_length=6)
+    province = models.CharField(max_length=2, validators=[validate_no_special_characters, validate_no_numbers])
+    postalCode = models.CharField(max_length=6, validators=[validate_postal_code])
     history = models.TextField(blank=True, null=True)
     createdAt = models.DateTimeField(verbose_name="Date Created", auto_now_add=True, null=True)
 
@@ -42,14 +42,14 @@ class Item(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders')
-    firstName = models.CharField(max_length=15)
-    lastName = models.CharField(max_length=15)
+    firstName = models.CharField(max_length=15, validators=[validate_no_numbers, validate_no_special_characters])
+    lastName = models.CharField(max_length=15, validators=[validate_no_numbers, validate_no_special_characters])
     email = models.EmailField()
-    address = models.CharField(max_length=15)
-    city = models.CharField(max_length=15)
-    country = CountryField(blank_label='(select country)')
-    province = models.CharField(max_length=2)
-    postalCode = models.CharField(max_length=6)
+    address = models.CharField(max_length=15, validators=[validate_no_special_characters])
+    city = models.CharField(max_length=15, validators=[validate_no_numbers, validate_no_special_characters])
+    country = CountryField(blank_label='(select country)', null=False)
+    province = models.CharField(max_length=2, validators=[validate_no_special_characters, validate_no_numbers])
+    postalCode = models.CharField(max_length=6, validators=[validate_postal_code])
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
     is_paid = models.BooleanField(default=False)
@@ -57,6 +57,9 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Order {self.id} by {self.firstName} {self.lastName}'
+    
+    def get_total_price(self):
+        return sum(item.price * item.quantity for item in self.order_items.all())
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')

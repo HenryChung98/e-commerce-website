@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.header-container {
+  border: 1px solid;
+}
+.header-container ul {
+  list-style: none;
+  padding: 0;
+}
+.header-container li {
+  display: inline;
+  margin: 10px;
+}
+
+.footer-container {
+  border: 1px solid;
+}

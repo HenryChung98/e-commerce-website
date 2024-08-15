@@ -9,7 +9,10 @@
 
 {{ item.item }}
 {{ item.quantity }} * {{ item.price }}
-
+<a href="{% url 'increase-quantity' item.item.id %}"><button>+</button></a>
+<a href="{% url 'decrease-quantity' item.item.id %}"><button>-</button></a>
+<a href="{% url 'remove-item' item.item.id %}"><button>x</button></a>
+<br />
 {% endfor %}
 <br />
 total: {{ total }}

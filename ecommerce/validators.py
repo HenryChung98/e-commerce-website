@@ -26,6 +26,19 @@ def contains_special_character(value):
             return True
     return False
 
+def postal_code(postal_code, country='CA'):
+    patterns = {
+        'US': r'^\d{5}(?:-\d{4})?$',
+        'CA': r'^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$',  # e.g. K1A 0B1
+        'UK': r'^([A-Z]{1,2}\d[A-Z\d]? \d[A-Z]{2})$',  # e.g. W1A 1AA
+        'KR': r'^\d{5}$'  #  12345
+    }
+    pattern = patterns.get(country)
+    if not pattern:
+        return False
+
+    return True
+
 
 class CustomPasswordValidator:
     def validate(self, password, user=None):
@@ -48,3 +61,12 @@ class CustomPasswordValidator:
 def validate_no_special_characters(value):
     if contains_special_character(value):
         raise ValidationError("special character cannot be included")
+
+def validate_no_numbers(value):
+    if contains_number(value):
+        raise ValidationError("number cannot be included")
+    
+def validate_postal_code(value):
+    if not postal_code(value):
+        raise ValueError('Unsupported country code')
+    

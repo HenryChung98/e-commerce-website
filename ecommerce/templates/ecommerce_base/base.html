@@ -17,28 +17,42 @@
       type="image/png"
       href="{% static 'ecommerce/favicon/favicon.svg' %}"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'ecommerce/styles/style.css' %}"
+    />
 
     <title>{% block title %}e-commerce{% endblock title %}</title>
   </head>
   <body>
     {% block header %}
-    <header>header</header>
-    <nav>
-      <ul>
-        <a href="{% url 'index' %}"><li>home</li></a>
-        <a href="{% url 'item-list' %}"><li>items</li></a>
-        <a href="{% url 'cart-list' %}"><li>cart</li></a>
-        {% if user.id %}
-          <a href="{% url 'user-profile' user.id %}"><li>profile</li></a>
-        {% endif %}
-      </ul>
-    </nav>
+    <div class="header-container">
+      <header>header</header>
+      <nav>
+        <ul>
+          <a href="{% url 'index' %}"><li>home</li></a>
+          <a href="{% url 'item-list' %}"><li>items</li></a>
+          <a href="{% url 'cart-list' %}"><li>cart</li></a>
+          <li>
+            <input />
+            <a href="{% url 'cart-list' %}">search</a>
+          </li>
+          
+          {% if user.id %}
+            <a href="{% url 'user-profile' user.id %}"><li>profile</li></a>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
     {% endblock header %} 
     
     {% block content %}{% endblock content %} 
 
     {% block footer %}
+    <div class="footer-container">
     <footer>footer</footer>
+    </div>
     {% endblock footer %}
   </body>
 </html>

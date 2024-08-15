@@ -2,28 +2,41 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-{{user.id}}
-<br />
-{% if orders %}
-{% for order in orders %}
-order id: {{order.id}}<br />
-order firstname: {{order.firstName}}<br />
-order lastname: {{order.lastName}}<br />
-{% endfor %}
-{% else %}
-no ordered yet
-{% endif%}
-<br /><br />
-{% if reviews %}
-{% for review in reviews %}
-review id: {{review.id}}<br />
-review item: {{review.item}}<br />
 
-{% endfor %}
-{% else %}
-no review
-{% endif%}
+    {{ user.nickname }}
+
+        {% if orders %}
+
+            {% for order in orders %}
+
+                {% if order.is_paid %}
+                    <h3>{{ order.createdAt }}</h3>
+
+                    {% for item in orderItems %}
+                        order id: {{item.id}}<br />
+                        order: {{item.item}}<br />
+                        price: {{item.price}}<br />
+                        quantity: {{item.quantity}}<br /><br />
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endfor %}
+
+        {% else %}
+        no ordered yet
+
+        {% endif %}
+    <br /><br />
+    {% if reviews %}
+        {% for review in reviews %}
+            review id: {{review.id}}<br />
+            review item: {{review.item}}<br />
+        {% endfor %}
+    {% else %}
+    no review
+    {% endif %}
 
 {% else %}
-{% endif%}
+{% endif %}
 {% endblock content %}
