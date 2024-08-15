@@ -176,4 +176,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # API key
-# this is in gitignore
+STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY", "pk_test_51PnoJKLXuXyUTOdP4l2B0TNCaH3WIWdRK0yOXsnGfxfNv1N0UYLWYNytr6CTsJFe5c6bCy7gMU7Kv5o09azlMj7y004OtXrsiz")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "sk_test_51PnoJKLXuXyUTOdP7lx8HAvtitT2mGbfesovuYcpZrOQwVP4oiaLKtJSRhHCm42t4pTbcFsi7AmIhFjxJcj4ZHyT00ESLagta6")

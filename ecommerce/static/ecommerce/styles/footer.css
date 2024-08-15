@@ -1,0 +1,15 @@
+footer {
+  background-color: rgb(169, 215, 159);
+  }
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+.footer-container a img {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+}

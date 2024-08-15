@@ -4,18 +4,26 @@
   border: 0;
 }
 
-.header-container {
-  border: 1px solid;
-}
-.header-container ul {
-  list-style: none;
-  padding: 0;
-}
-.header-container li {
-  display: inline;
-  margin: 10px;
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.footer-container {
-  border: 1px solid;
+main {
+  background-color: aquamarine;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+input {
+  background-color: #f4f2ee;
+  border-radius: 10px;
+}
+
+.error {
+  color: red;
 }

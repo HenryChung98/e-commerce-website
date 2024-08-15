@@ -1,0 +1,2 @@
+const a = document.getElementsByClassName('')
+
