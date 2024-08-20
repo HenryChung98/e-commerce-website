@@ -1,8 +1,0 @@
-{% extends "ecommerce_base/base.html" %}
-
-{% block content %}
-<h1>item list</h1>
-{% for item in items %}
-<a href="{% url 'item-detail' item.id %}"><p>{{item.name}} detail</p></a>
-{% endfor %}
-{% endblock content %}

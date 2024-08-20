@@ -1,27 +1,48 @@
-{% extends "ecommerce_base/base.html" %}
+{% extends "ecommerce_base/base_with_header.html" %}
+
+{% load static %}
+
+{% block css %}
+<link
+rel="stylesheet"
+type="text/css"
+href="{% static 'ecommerce/styles/itemDetail.css' %}"
+/>
+{% endblock css %}
 
 {% block content %}
-<h1>{{item.name}}</h1>
-<h1>{{item.category}}</h1>
-<img src="{{item.image.url}}" alt="itemImg">
-<a href="{% url 'create-review' item.id %}">Create Review</a>
+<div class="item-detail">
+<div class="item-detail-box">
+    <img src="{{item.image.url}}" alt="itemImg">
+    <div class="item-info-container">
+        <h1>{{item.name}}</h1>
+        5
+        <hr style="border: 1px solid #000; width: 100%; margin: 20px 0;">
+        <h3>{{item.category}}</h3>
+        <h3>{{item.price}}</h3>
+        <form action="{% url 'add-to-cart' item.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="add-cart-btn">Add to Cart</button>
+        </form>
+    </div>
+</div>
 
-<form action="{% url 'add-to-cart' item.id %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">Add to Cart</button>
-</form>
-{% if reviews %}
-<ul>
-    {% for review in reviews %}
+<p>{{item.description}}</p>
+<br />
+<a href="{% url 'create-review' item.id %}">Create Review</a>
+    {% if reviews %}
+    <ul>
+        {% for review in reviews %}
         <li>
             <strong>User:</strong> {{ review.user.nickname }}<br>
             <strong>Rate:</strong> {{ review.rate }}<br>
             <strong>Comment:</strong> {{ review.comment }}<br>
             <strong>Date:</strong> {{ review.createdAt }}
         </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No reviews available for this item.</p>
-{% endif %}
-{% endblock content %}
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No reviews available for this item.</p>
+    {% endif %}
+</div>
+    {% endblock content %}

@@ -1,5 +1,8 @@
 {% extends "ecommerce_base/base.html" %}
+
 {% load static %}
+{% load widget_tweaks %}
+
 {% block css %}
 <link
   rel="stylesheet"
@@ -10,84 +13,76 @@
 {% block content %}
 <form method="post">
   {% csrf_token %}
+<div class="email-and-nickname">
+  <span>
+    {{ form.email|add_class:"cp-input"|attr:"placeholder:email"|add_error_class:"error" }}
+    {% if form.email.errors %}
+      <div class="error">{{ form.email.errors }}</div>
+    {% endif %}
+  </span>
+  <span>
+    {{ form.nickname|add_class:"cp-input"|attr:"placeholder:Nickname"|add_error_class:"error" }}
+    {% if form.nickname.errors %}
+      <div class="error">{{ form.nickname.errors }}</div>
+    {% endif %}
+  </span>
+</div>
+<div class="password-container">
+  <span>
+    {{ form.password1|add_class:"cp-input"|attr:"placeholder:password"|add_error_class:"error" }}
+    {% if form.password1.errors %}
+      <div class="error">{{ form.password1.errors }}</div>
+    {% endif %}
+  </span>
+    <span>
+      {{ form.password2|add_class:"cp-input"|attr:"placeholder:Confirm Password"|add_error_class:"error" }}
+      {% if form.password2.errors %}
+        <div class="error">{{ form.password2.errors }}</div>
+      {% endif %}
+    </span>
+</div>
+  <div class="name-container">
+    <span>
+      {{ form.firstName|add_class:"cp-input"|attr:"placeholder:First Name"|add_error_class:"error"}}
+      {% if form.firstName.errors %}
+      <div class="error">{{ form.firstName.errors }}</div>
+      {% endif %}
+    </span>
+    <span>
+      {{ form.lastName|add_class:"cp-input"|attr:"placeholder:Last Name"|add_error_class:"error" }}
+      {% if form.lastName.errors %}
+      <div class="error">{{ form.lastName.errors }}</div>
+      {% endif %}
+    </span>
+  </div>
 
-  <label for="id_email">Email:</label>
-  {{ form.email }}
-  {% if form.email.errors %}
-    <div class="error">{{ form.email.errors }}</div>
-  {% endif %}
-  <br />
+  <div class="address-container">
+    {{ form.address|add_class:"cp-input"|attr:"placeholder:Address"|add_error_class:"error" }}
+    {% if form.address.errors %}
+      <div class="error">{{ form.address.errors }}</div>
+    {% endif %}
 
-  <label for="id_password1">Password:</label>
-  {{ form.password1 }}
-  {% if form.password1.errors %}
-    <div class="error">{{ form.password1.errors }}</div>
-  {% endif %}
-  <br />
+    {{ form.city|add_class:"cp-input"|attr:"placeholder:City"|add_error_class:"error" }}
+    {% if form.city.errors %}
+      <div class="error">{{ form.city.errors }}</div>
+    {% endif %}
 
-  <label for="id_password2">Confirm Password:</label>
-  {{ form.password2 }}
-  {% if form.password2.errors %}
-    <div class="error">{{ form.password2.errors }}</div>
-  {% endif %}
-  <br />
+    {{ form.country|add_class:"cp-input"|attr:"placeholder:Country"|add_error_class:"error" }}
+    {% if form.country.errors %}
+      <div class="error">{{ form.country.errors }}</div>
+    {% endif %}
 
-  <label for="id_firstName">First Name:</label>
-  {{ form.firstName }}
-  {% if form.firstName.errors %}
-    <div class="error">{{ form.firstName.errors }}</div>
-  {% endif %}
-  <br />
+    {{ form.province|add_class:"cp-input"|attr:"placeholder:Province"|add_error_class:"error" }}
+    {% if form.province.errors %}
+      <div class="error">{{ form.province.errors }}</div>
+    {% endif %}
 
-  <label for="id_lastName">Last Name:</label>
-  {{ form.lastName }}
-  {% if form.lastName.errors %}
-    <div class="error">{{ form.lastName.errors }}</div>
-  {% endif %}
-  <br />
+    {{ form.postalCode|add_class:"cp-input"|attr:"placeholder:Postal Code"|add_error_class:"error" }}
+    {% if form.postalCode.errors %}
+      <div class="error">{{ form.postalCode.errors }}</div>
+    {% endif %}
+  </div>
 
-  <label for="id_nickname">Nickname:</label>
-  {{ form.nickname }}
-  {% if form.nickname.errors %}
-    <div class="error">{{ form.nickname.errors }}</div>
-  {% endif %}
-  <br />
-
-  <label for="id_address">Address:</label>
-  {{ form.address }}
-  {% if form.address.errors %}
-    <div class="error">{{ form.address.errors }}</div>
-  {% endif %}
-  <br />
-
-  <label for="id_city">City:</label>
-  {{ form.city }}
-  {% if form.city.errors %}
-    <div class="error">{{ form.city.errors }}</div>
-  {% endif %}
-  <br />
-
-  <label for="id_country">Country:</label>
-  {{ form.country }}
-  {% if form.country.errors %}
-    <div class="error">{{ form.country.errors }}</div>
-  {% endif %}
-  <br />
-
-  <label for="id_province">Province:</label>
-  {{ form.province }}
-  {% if form.province.errors %}
-    <div class="error">{{ form.province.errors }}</div>
-  {% endif %}
-  <br />
-
-  <label for="id_postalCode">Postal Code:</label>
-  {{ form.postalCode }}
-  {% if form.postalCode.errors %}
-    <div class="error">{{ form.postalCode.errors }}</div>
-  {% endif %}
-  <br />
-
-  <button type="submit">sign up</button>
+  <button type="submit" class="cp-button">sign up</button>
 </form>
 {% endblock content %}

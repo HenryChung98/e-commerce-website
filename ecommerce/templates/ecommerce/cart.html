@@ -1,5 +1,14 @@
-{% extends "ecommerce_base/base.html" %}
+{% extends "ecommerce_base/base_with_header.html" %}
 {% load static %}
+
+{% block css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'ecommerce/styles/cart.css' %}"
+/>
+{% endblock css %} 
+
 
 {% block content %}
 
@@ -7,12 +16,18 @@
 
 {% for item in cart_items %}
 
-{{ item.item }}
-{{ item.quantity }} * {{ item.price }}
-<a href="{% url 'increase-quantity' item.item.id %}"><button>+</button></a>
-<a href="{% url 'decrease-quantity' item.item.id %}"><button>-</button></a>
-<a href="{% url 'remove-item' item.item.id %}"><button>x</button></a>
-<br />
+<div class="cart-item">
+    <div class="cart-item-des">
+        <img src="{{item.item.image.url}}" alt="item-img" />
+        {{ item.item }}
+        {{ item.quantity }} * {{ item.price }}
+    </div>
+    <div class="cart-btn-container">
+        <a href="{% url 'increase-quantity' item.item.id %}"><button class="mod-btn">+</button></a>
+        <a href="{% url 'decrease-quantity' item.item.id %}"><button class="mod-btn">-</button></a>
+        <a href="{% url 'remove-item' item.item.id %}"><button class="mod-btn delete">x</button></a>
+    </div>
+</div>
 {% endfor %}
 <br />
 total: {{ total }}

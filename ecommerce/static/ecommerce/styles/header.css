@@ -27,22 +27,25 @@ header {
 .category-btn .scroll-bar {
   position: absolute;
   left: -250px;
-  transition: left .7s ease, opacity .9s ease;
+  transition: left 0.7s ease, opacity 0.9s ease;
   opacity: 0;
   width: 200px;
   text-align: center;
   background-color: white;
   font-size: 15px;
 }
+.scroll-bar {
+  border: 1px solid;
+  border-radius: 10px;
+}
 .scroll-bar.visible {
   left: 0;
   opacity: 1;
 }
-.category-btn .scroll-bar a{
+.category-btn .scroll-bar a {
   display: block;
   padding: 5px 5px;
 }
-
 
 .header-logo {
   display: flex;
@@ -55,8 +58,8 @@ header {
   width: 60px;
 }
 
-
-.search-container, .user-menu  {
+.search-container,
+.user-menu {
   margin: 10px;
 }
 
@@ -68,26 +71,33 @@ header {
   justify-content: center;
   align-items: center;
 }
+.search-container form {
+  display: flex;
+  width: 100%;
+}
 .search-container input {
   border: 1px solid;
   border-radius: 10px;
   font-size: 15px;
-  width: 90%;
+  width: 100%;
   padding: 5px;
   margin: 3px;
 }
-header .search-container img {
-  width: 25px;
+.search-container button {
+  border-radius: 30px;
   margin: 3px;
+  padding: 5px;
   position: relative;
-  top: 3px;
+  top: 1px;
 }
-
+.search-container img {
+  width: 25px;
+}
 
 header ul {
   list-style: none;
   padding: 0;
-  min-width: 130px;
+  min-width: 120px;
 }
 header li {
   display: inline;
@@ -95,12 +105,16 @@ header li {
   min-width: 60px;
   font-size: 20px;
 }
-header ul li:hover, header ul li a:hover, .scroll-bar a:hover{
+header ul li:hover,
+header ul li a:hover,
+.scroll-bar a:hover {
   color: aqua;
-  transition: .2s;
+  transition: 0.2s;
 }
 
-.header-logo, .user-menu, .category-btn  {
+.header-logo,
+.user-menu,
+.category-btn {
   background-color: #f4f2ee;
   background-color: plum;
   border-radius: 5px;

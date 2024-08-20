@@ -1,0 +1,15 @@
+.item-box-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 50px; 
+}
+
+.item-box {
+    padding: 10px;
+    border: 1px solid;
+}
+
+.item-box img {
+    width: 250px;
+}

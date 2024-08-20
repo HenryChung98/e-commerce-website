@@ -1,0 +1,32 @@
+{% extends "ecommerce_base/base_with_header.html" %} 
+
+{% load static %} 
+
+{% block css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'ecommerce/styles/itemList.css' %}"
+/>
+{% endblock css %} 
+
+{% block content %}
+<div class="item-box-container">
+  {% if results %}
+
+  <div class="item-box-container">
+    {% for item in results %}
+    <a href="{% url 'item-detail' item.id %}">
+      <div class="item-box">
+        <img src="{{item.image.url}}" alt="itemImg" />
+        <h3>${{item.price}}</h3>
+        <h3>{{item.name}}</h3>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p>No results found</p>
+  {% endif %}
+</div>
+{% endblock content %}

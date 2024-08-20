@@ -11,9 +11,13 @@ urlpatterns = [
     path('cart/remove/<int:item_id>/', views.decrease_quantity, name='decrease-quantity'),
     path('cart/delete/<int:item_id>/', views.remove_item, name='remove-item'),
     
+    # search
+    path('search/', views.search, name='search'),
+    
     # items
     path("items/", views.item_list, name='item-list'),
     path("items/<int:item_id>/", views.item_detail, name='item-detail'),
+    path('items/<str:category>/', views.item_category, name='item-list'),
     path("items/<int:item_id>/review", views.create_review, name='create-review'),
     
     # order

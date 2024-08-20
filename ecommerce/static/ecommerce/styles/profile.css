@@ -1,0 +1,19 @@
+button {
+    font-size: 15px;
+    border-radius: 10px;
+    margin: 20px 0 20px;
+    padding: 10px;
+}
+
+.ordered-container {
+    border: 1px solid;
+}
+
+.review-container {
+    border: 1px solid;
+}
+
+.review-item {
+    border: 1px solid;
+    margin: 10px;
+}

@@ -9,7 +9,9 @@ from .models import User, Item, Order, OrderItem, Cart, CartItem, Review
 from .forms import ReviewForm, OrderForm, PaymentForm
 
 def index(request):
-    return render(request, "ecommerce/index.html")
+    items = Item.objects.all()
+    context = {"items": items}
+    return render(request, "ecommerce/index.html", context)
 
 class CustomPasswordChangeView(PasswordChangeView):
     def get_success_url(self):
@@ -20,7 +22,7 @@ class CustomPasswordChangeView(PasswordChangeView):
 def item_list(request):
     items = Item.objects.all()
     context = {"items": items}
-    return render(request, "ecommerce/item_list.html", context)
+    return render(request, "ecommerce/item_list_templates/item_list.html", context)
 
 def item_detail(request, item_id):
     item = Item.objects.get(id=item_id)
@@ -30,6 +32,19 @@ def item_detail(request, item_id):
             }
     return render(request, "ecommerce/item_detail.html", context)
 
+
+def search(request):
+    query = request.GET.get('q')
+    results = Item.objects.filter(name__icontains=query)
+    return render(request, 'ecommerce/item_list_templates/search_results.html', {'results': results, 'query': query})
+
+
+def item_category(request, category=None):
+    if category:
+        items = Item.objects.filter(category=category)
+    else:
+        items = Item.objects.all()
+    return render(request, 'ecommerce/item_list_templates/item_category_results.html', {'items': items})
 
 # cart
 @login_required

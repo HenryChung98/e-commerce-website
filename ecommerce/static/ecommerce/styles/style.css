@@ -3,17 +3,41 @@
   padding: 0;
   border: 0;
 }
+:root {
+  --border: #e3e1dc;
+  --max-width: 1100px;
+  --max-content-width: 1000px;
+  --body-background: #fcfcfc;
+  --site-header-background: rgba(255, 255, 255, 0.76);
+  --navbar: #2f2c28;
+  --site-footer: #bcb9b0;
+  --site-footer-background: #2f2c28;
+  --account-link: #ffcc00;
+  --content-list-contet-date: #bcb9b0;
+  --main-header-background: #fff;
+  --main-header-height: 565px;
+  --main-header-border: #f0efec;
+  --main-header: #fff;
+  --content-list-sub-heading: #7b776b;
+  --content-list-pagination-current: #fff;
+  --content-list-pagination-current-bg: #ffcc00;
+  --review-detail-date: #bcb9b0;
+  --review-detail-side-padding: 8px;
+  --profile-header-edit: #7b776b;
+  --file-content-border: #cccac3;
+  --file-content-background: #fff;
+}
 
 body {
     display: flex;
+    min-height: 100vh;
     flex-direction: column;
     justify-content: space-between;
 }
 
 main {
-  background-color: aquamarine;
+  margin: 50px;
 }
-
 a {
     text-decoration: none;
     color: black;

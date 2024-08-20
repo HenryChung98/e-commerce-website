@@ -1,10 +1,19 @@
-{% extends "ecommerce_base/base.html" %}
+{% extends "ecommerce_base/base_with_header.html" %}
+
+{% load static %}
+{% block css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'ecommerce/styles/profile.css' %}"
+/>
+{% endblock css %} 
 
 {% block content %}
 {% if user.is_authenticated %}
-
-    {{ user.nickname }}
-
+<h1>{{ user.nickname }}</h1>
+<a href="{% url 'account_change_password' %}"><button>change password</button></a> 
+        <div class="ordered-container">
         {% if orders %}
 
             {% for order in orders %}
@@ -27,16 +36,23 @@
         no ordered yet
 
         {% endif %}
+        </div>
     <br /><br />
+    <div class="review-container">
     {% if reviews %}
         {% for review in reviews %}
-            review id: {{review.id}}<br />
-            review item: {{review.item}}<br />
+        <a href="{% url 'item-detail' review.item.id %}">
+            <div class="review-item">
+                <h4>reviewed item: {{review.item}}</h4>
+                {{review.item.price}}
+            </div>
+        </a>
         {% endfor %}
     {% else %}
     no review
     {% endif %}
-
+    </div>
+    <a href="{% url 'account_logout'%}"><button>logout</button></a>
 {% else %}
 {% endif %}
 {% endblock content %}

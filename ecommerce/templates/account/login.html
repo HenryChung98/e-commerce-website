@@ -1,0 +1,41 @@
+{% extends "ecommerce_base/base.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'ecommerce/styles/signup.css' %}"
+/>
+{% endblock css %}
+{% block title %}Sign In{% endblock title %}
+
+{% block content %}
+<div class="title-container">
+<a href="{% url 'index' %}"><h1>Online Shop</h1></a>
+</div>
+<br/>
+<div class="account-background">
+<form method="post">
+  {% csrf_token %}
+  <div>
+    {{ form.login|add_class:"cp-input"|attr:"placeholder:email"|add_error_class:"error"}}
+    {%for error in form.login.errors %} 
+    <div class="form-error error-message">{{ error }}</div>
+    {% endfor %}
+  </div>
+  <div>
+    {{ form.password|add_class:"cp-input"|attr:"placeholder:password"|add_error_class:"error"}}
+    {%for error in form.password.errors %} 
+    <div class="form-error error-message">{{ error }}</div>
+    {% endfor %}
+  </div>
+  
+  <button class="cp-button" type="submit">Sign In</button>
+</form>
+<a class="item" href="{% url 'account_reset_password' %}">Forgot Your Password?</a>
+<a class="item" href="{% url 'account_signup' %}">Sign Up</a>
+</div>
+{% endblock content %}

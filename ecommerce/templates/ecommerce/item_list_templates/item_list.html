@@ -1,25 +1,14 @@
 {% extends "ecommerce_base/base_with_header.html" %}
-
 {% load static %}
+
 {% block css %}
-<link
-rel="stylesheet"
-type="text/css"
-href="{% static 'ecommerce/styles/index.css' %}"
-/>
 <link
 rel="stylesheet"
 type="text/css"
 href="{% static 'ecommerce/styles/itemList.css' %}"
 />
 {% endblock css %}
-
 {% block content %}
-<img src="{% static 'ecommerce/assets/images/index-banner.jpg' %}" alt="index-banner" class="index-banner">
-{% if user.is_authenticated %}
-
-{% else %}
-{% endif %}
 <div class="item-box-container">
 {% for item in items %}
 <a href="{% url 'item-detail' item.id %}">

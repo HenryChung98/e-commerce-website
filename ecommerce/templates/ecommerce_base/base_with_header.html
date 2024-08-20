@@ -1,0 +1,104 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    {% block css %}
+    {% endblock css %}
+
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'ecommerce/favicon/favicon.svg' %}"
+    />
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'ecommerce/styles/style.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'ecommerce/styles/header.css' %}"
+    />
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'ecommerce/styles/footer.css' %}"
+    />
+
+    <title>{% block title %}e-commerce{% endblock title %}</title>
+  </head>
+  <body>
+    {% block header %}
+      <header>
+        <div class="header-container">
+        <div class="category-btn">
+          <img src="{% static 'ecommerce/assets/icons/menu-icon.png' %}" alt="menu-icon" />
+          <nav class="scroll-bar">
+            <a href="{% url 'item-list' 'food' %}">food</a>
+            <a href="{% url 'item-list' 'category2' %}">category2</a>
+            <a href="{% url 'item-list' 'category3' %}">category3</a>
+          </nav>
+        </div>
+        <a href="{% url 'index' %}">
+          <div class="header-logo">
+            <img src="{% static 'ecommerce/assets/icons/logo-icon.png' %}" alt="logo-icon" />
+            Online Shop
+          </div>
+        </a>
+        <div class="search-container">
+          <form method="GET" action="{% url 'search' %}">
+            <input name="q" placeholder="Search...">
+            <span><button type="submit"><img src="{% static 'ecommerce/assets/icons/search-icon.png' %}" alt="search-icon" /></button></span>
+        </form>
+        </div>
+        <div class="user-menu">
+          <ul>
+            <li><a href="{% url 'cart-list' %}">cart</a></li>
+            {% if user.id %}
+              <li><a href="{% url 'user-profile' user.id %}">profile</a></li>
+            {% else %}
+              <li><a href="{% url 'account_login' %}">Sign in</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      </header>
+
+      <script>
+        const scrollBar = document.querySelector('.scroll-bar');
+        const categoryBar = document.querySelector('.category-btn');
+        categoryBar.addEventListener('click', function(){
+          scrollBar.classList.toggle('visible');
+        });
+
+      </script>
+    {% endblock header %} 
+
+    <main>
+    {% block content %}{% endblock content %} 
+    </main>
+    
+    {% block footer %}
+    <footer>
+      <div class="footer-container">
+        <p>
+          © 2024 Online Shop App
+        </p>
+        <div class="footer-icon-container">
+          <a href="https://www.instagram.com/henryy__98"><img src="{% static 'ecommerce/assets/icons/instagram-icon.png' %}" alt"instagram-icon" /></a>
+          <a href="https://www.linkedin.com/in/henry-chung-0550812ab/"><img src="{% static 'ecommerce/assets/icons/linkedin-icon.png' %}" alt"instagram-icon" /></a>
+          <a href="https://github.com/HenryChung98"><img src="{% static 'ecommerce/assets/icons/github-icon.png' %}" alt"instagram-icon" /></a>
+        </div>
+      </div>
+    </footer>
+    {% endblock footer %}
+  </body>
+</html>
