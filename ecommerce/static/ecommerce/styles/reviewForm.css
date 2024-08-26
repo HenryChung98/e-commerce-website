@@ -1,0 +1,40 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.star-rating {
+    display: flex;
+    cursor: pointer;
+}
+
+.star-rating span {
+    font-size: 2em; 
+    color: lightgray; 
+    transition: color 0.2s; 
+}
+
+
+.star-rating span {
+    color: lightgray;
+}
+
+.star-rating .selected {
+    color: gold;
+}
+
+.star-rating span.hover {
+    color: gold; 
+}
+
+#id_rate {
+    display: none;
+}
+#id_comment{
+    border: 1px solid;
+    width: 500px;
+    height: 300px;
+}

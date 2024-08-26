@@ -108,7 +108,7 @@ header li {
 header ul li:hover,
 header ul li a:hover,
 .scroll-bar a:hover {
-  color: aqua;
+  opacity: .5;
   transition: 0.2s;
 }
 
@@ -116,6 +116,6 @@ header ul li a:hover,
 .user-menu,
 .category-btn {
   background-color: #f4f2ee;
-  background-color: plum;
+  background-color: #adcdff;
   border-radius: 5px;
 }

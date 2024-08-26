@@ -8,6 +8,27 @@ button {
 .ordered-container {
     border: 1px solid;
 }
+.ordered-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.ordered-item {
+    flex: 1 1 calc(33.333% - 10px);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid;
+}
+.ordered-container img {
+    width: 300px;
+}
+.item-des {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
 
 .review-container {
     border: 1px solid;

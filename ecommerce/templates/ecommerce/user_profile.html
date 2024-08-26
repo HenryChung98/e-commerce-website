@@ -17,19 +17,24 @@
         {% if orders %}
 
             {% for order in orders %}
-
-                {% if order.is_paid %}
-                    <h3>{{ order.createdAt }}</h3>
-
-                    {% for item in orderItems %}
-                        order id: {{item.id}}<br />
-                        order: {{item.item}}<br />
-                        price: {{item.price}}<br />
-                        quantity: {{item.quantity}}<br /><br />
+            {% if order.is_paid %}
+            <h3>{{ order.createdAt }}</h3>
+            <div class="ordered-items">
+                {% for item in orderItems %}
+                <a href="{% url 'item-detail' item.item.id %}">
+                    <div class="ordered-item">
+                            <img src="{{item.item.image.url}}" alt="item-img">
+                            <div class="item-des">
+                                <h1>{{item.item}}</h1>
+                                <h4>${{item.price}}</h4>
+                                <h4>quantity: {{item.quantity}}</h4>
+                            </div>
+                    </div>
+                </a>
                     {% endfor %}
-
+                {% comment %} <hr style="border: 1px solid #000; width: 100%; margin: 20px 0;"> {% endcomment %}
                 {% endif %}
-
+            </div>
             {% endfor %}
 
         {% else %}

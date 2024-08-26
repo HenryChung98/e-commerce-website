@@ -1,10 +1,80 @@
 {% extends "ecommerce_base/base.html" %}
 {% load static %}
 
+{% block css %}
+<link
+rel="stylesheet"
+type="text/css"
+href="{% static 'ecommerce/styles/reviewForm.css' %}"
+/>
+{% endblock css %}
+
 {% block content %}
-<form method="post">{% csrf_token %}
-    {{ form.rate }}<br /><br />
-    {{ form.comment }}
-    <input type="submit" value="Create Review" />
+<form method="post">
+    {% csrf_token %}
+    <div class="star-rating">
+        <span data-value="1" class="selected">&#9733;</span>
+        <span data-value="2">&#9733;</span>
+        <span data-value="3">&#9733;</span>
+        <span data-value="4">&#9733;</span>
+        <span data-value="5">&#9733;</span>
+    </div>
+    <p id="rating-value">Rating: 1</p>
+    <div class="rate-container">
+        {{ form.rate }}<br />
+    </div>
+    <div class="content-container">
+        Content: <br />
+        {{ form.comment }}
+    </div>
+    <button type="submit">Create Review</button>
 </form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const stars = document.querySelectorAll('.star-rating span');
+        const ratingValue = document.getElementById('rating-value');
+        const rateInput = document.querySelector('[name="rate"]'); 
+    
+        stars.forEach((star, index) => {
+            star.addEventListener('mouseover', () => {
+                stars.forEach((s, i) => {
+                    if (i <= index) {
+                        s.classList.add('hover');
+                    } else {
+                        s.classList.remove('hover');
+                    }
+                });
+            });
+    
+            star.addEventListener('mouseout', () => {
+                stars.forEach((s) => {
+                    s.classList.remove('hover');
+                });
+            });
+    
+            star.addEventListener('click', () => {
+                // 선택된 별까지 모두 색상을 변경
+                stars.forEach((s) => {
+                    s.classList.remove('selected');
+                });
+                star.classList.add('selected');
+                let selected = false;
+                stars.forEach((s) => {
+                    if (selected) {
+                        s.classList.remove('selected');
+                    } else {
+                        s.classList.add('selected');
+                    }
+                    if (s === star) selected = true;
+                });
+    
+                // 선택된 평점 값을 표시하고 form의 rate 필드에 설정
+                const rating = star.getAttribute('data-value');
+                ratingValue.textContent = `Rating: ${rating}`;
+                rateInput.value = rating; // form의 rate 필드 값 설정
+            });
+        });
+    });
+</script>
 {% endblock content %}

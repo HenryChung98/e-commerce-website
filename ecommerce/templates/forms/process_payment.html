@@ -5,11 +5,11 @@
 <!-- templates/payment_form.html -->
 <form action="{% url 'process_payment' %}" method="post" id="payment-form">
     {% csrf_token %}
-
+    {{ form.as_p }}
 
     <!-- Stripe Elements가 카드 정보를 수집합니다. -->
     <div id="card-element">
-        {{ form.as_p }}
+
     </div>
 
     <!-- 카드 오류를 표시할 영역 -->

@@ -25,10 +25,15 @@ class SignupForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+    rate = forms.IntegerField(
+        min_value=1,
+        max_value=5,
+        initial=1,  
+    )
 
     class Meta:
         model = Review
-        fields = '__all__'
+        fields = ['rate', 'comment']
 
 
 class OrderForm(forms.ModelForm):

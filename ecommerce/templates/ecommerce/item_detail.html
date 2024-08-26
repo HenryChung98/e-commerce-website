@@ -35,10 +35,19 @@ href="{% static 'ecommerce/styles/itemDetail.css' %}"
         {% for review in reviews %}
         <li>
             <strong>User:</strong> {{ review.user.nickname }}<br>
-            <strong>Rate:</strong> {{ review.rate }}<br>
+            <strong>Rate:</strong> 
+            {% for i in "12345" %}
+                {% if forloop.counter <= review.rate %}
+                    <span style="color: gold;">&#9733;</span>
+                {% else %}
+                    <span style="color: lightgray;">&#9733;</span>
+                {% endif %}
+            {% endfor %}
+            <br>
             <strong>Comment:</strong> {{ review.comment }}<br>
             <strong>Date:</strong> {{ review.createdAt }}
         </li>
+        <br />
         {% endfor %}
     </ul>
     {% else %}
