@@ -4,6 +4,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #bbbbbc;
 }
 .header-container {
   margin-left: 200px;
@@ -35,7 +36,7 @@ header {
   font-size: 15px;
 }
 .scroll-bar {
-  border: 1px solid;
+  border: 1px solid #bbbbbc;
   border-radius: 10px;
 }
 .scroll-bar.visible {
@@ -61,6 +62,7 @@ header {
 .search-container,
 .user-menu {
   margin: 10px;
+  
 }
 
 .search-container {
@@ -93,6 +95,9 @@ header {
 .search-container img {
   width: 25px;
 }
+.search-container input {
+  border: 1px solid #bbbbbc;
+}
 
 header ul {
   list-style: none;
@@ -115,7 +120,12 @@ header ul li a:hover,
 .header-logo,
 .user-menu,
 .category-btn {
-  background-color: #f4f2ee;
-  background-color: #adcdff;
+  /* background-color: #f4f2ee; */
+  /* background-color: #adcdff; */
   border-radius: 5px;
+}
+
+.category-btn img {
+    background-color: #adcdff;
+    border-radius: 10px;
 }

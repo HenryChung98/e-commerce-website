@@ -22,20 +22,21 @@ href="{% static 'ecommerce/styles/itemDetail.css' %}"
         <h3>{{item.price}}</h3>
         <form action="{% url 'add-to-cart' item.id %}" method="POST">
             {% csrf_token %}
-            <button type="submit" class="add-cart-btn">Add to Cart</button>
+            <button type="submit" class="add-cart-btn" id="add-cart-btn">Add to Cart</button>
         </form>
     </div>
 </div>
-
-<p>{{item.description}}</p>
+<div class="item-desc">
+    <p>{{item.description}}</p>
+</div>
 <br />
-<a href="{% url 'create-review' item.id %}">Create Review</a>
+<a href="{% url 'create-review' item.id %}"><button>Create Review</button></a>
     {% if reviews %}
     <ul>
         {% for review in reviews %}
-        <li>
-            <strong>User:</strong> {{ review.user.nickname }}<br>
-            <strong>Rate:</strong> 
+        <li class="review-item" id="review-{{review.id}}">
+        <div class="review-contents">
+            <strong>{{ review.user.nickname }}</strong><br>
             {% for i in "12345" %}
                 {% if forloop.counter <= review.rate %}
                     <span style="color: gold;">&#9733;</span>
@@ -43,9 +44,18 @@ href="{% static 'ecommerce/styles/itemDetail.css' %}"
                     <span style="color: lightgray;">&#9733;</span>
                 {% endif %}
             {% endfor %}
-            <br>
-            <strong>Comment:</strong> {{ review.comment }}<br>
-            <strong>Date:</strong> {{ review.createdAt }}
+            {{ review.createdAt.day }}/{{review.createdAt.month}}/{{review.createdAt.year}}<br />
+            {{ review.comment }}
+        </div>
+            {% if user.nickname == review.user.nickname %}
+            <div class="buttons-container">
+                <a href="{% url 'review-update' review.id%}"><button>edit</button></a>
+                <form action="{% url 'review-delete' review.id %}" method="post" onsubmit="return confirmDelete()">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+            {% endif %}
         </li>
         <br />
         {% endfor %}
@@ -54,4 +64,14 @@ href="{% static 'ecommerce/styles/itemDetail.css' %}"
     <p>No reviews available for this item.</p>
     {% endif %}
 </div>
+<script>
+    const addCartBtn = document.getElementById('add-cart-btn');
+    addCartBtn.addEventListener("click", () => {
+        alert("Successfully added to cart");
+    })
+
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete your review?");
+    }
+</script>
     {% endblock content %}

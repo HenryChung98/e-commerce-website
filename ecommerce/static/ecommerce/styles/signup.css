@@ -9,36 +9,75 @@ main {
     align-items: center;
     height: 100vh;
 }
-
-.cp-input, .cp-button {
-    width: 300px;
-    margin: 20px;
-    padding: 10px;
-    font-size: 15px;
-    border: solid 1px #b1afaa;
-    border-radius: 10px;
-}
-
-.address-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.cp-button {
-    width: 320px;
-}
-
-.account-background {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
+/* Container styles */
 form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Input field styles */
+.cp-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Error message styles */
+.error {
+    color: red;
+    font-size: 0.875em;
+    margin-bottom: 10px;
+}
+
+/* Button styles */
+.cp-button {
+    width: 100%;
+    margin: 10px 0 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cp-button:hover {
+    background-color: #45a049;
+}
+
+/* Container for grouped input fields */
+.email-and-nickname, .password-container, .name-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.email-and-nickname span, .password-container span, .name-container span {
+    flex: 1;
+}
+
+/* Address container styles */
+.address-container {
+    margin-top: 20px;
+}
+
+.address-container .cp-input {
+    width: calc(100% - 20px);
+}
+
+/* Form error container */
+.form-error {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    color: #721c24;
 }

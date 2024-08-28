@@ -3,10 +3,11 @@ from django.urls import reverse
 from allauth.account.views import PasswordChangeView
 from django.contrib.auth.decorators import login_required
 import stripe
+from django.views.generic import UpdateView, DeleteView
 from django.conf import settings
 
 from .models import User, Item, Order, OrderItem, Cart, CartItem, Review
-from .forms import ReviewForm, OrderForm, PaymentForm
+from .forms import ReviewForm, OrderForm, PaymentForm, SignupForm
 
 def index(request):
     items = Item.objects.all()
@@ -174,6 +175,25 @@ def create_review(request, item_id):
     return render(request, "forms/review_form.html", context)
 
 
+class ReviewUpdateView(UpdateView):
+    model = Review
+    form_class = ReviewForm
+    template_name = 'forms/review_form.html'
+    pk_url_kwarg = 'review_id'
+
+    def get_success_url(self):
+        return reverse('item-detail', kwargs={'item_id': self.object.item.id})
+
+
+class ReviewDeleteView(DeleteView):
+    model = Review
+    pk_url_kwarg = 'review_id'
+    context_object_name = 'review'
+
+    def get_success_url(self):
+        return reverse('item-detail', kwargs={'item_id': self.object.item.id})
+    
+
 @login_required
 def order_form(request):
     if request.method == 'POST':
@@ -268,3 +288,4 @@ def process_payment(request):
         form = PaymentForm()
 
     return render(request, 'forms/process_payment.html', {'form': form})
+

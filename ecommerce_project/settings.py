@@ -170,8 +170,6 @@ PASSWORD_RESET_TIMEOUT = 600 # Sets the number of seconds a password reset link 
 
 LOGIN_URL = '/login/'
 
-# Email settings
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -179,3 +177,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # API key
 STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY", "pk_test_51PnoJKLXuXyUTOdP4l2B0TNCaH3WIWdRK0yOXsnGfxfNv1N0UYLWYNytr6CTsJFe5c6bCy7gMU7Kv5o09azlMj7y004OtXrsiz")
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "sk_test_51PnoJKLXuXyUTOdP7lx8HAvtitT2mGbfesovuYcpZrOQwVP4oiaLKtJSRhHCm42t4pTbcFsi7AmIhFjxJcj4ZHyT00ESLagta6")
+
+# Email settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "tongsik98@gmail.com"
+EMAIL_HOST_PASSWORD = "eciy lybs sooe most"

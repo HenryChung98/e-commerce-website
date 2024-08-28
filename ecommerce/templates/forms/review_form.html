@@ -12,22 +12,38 @@ href="{% static 'ecommerce/styles/reviewForm.css' %}"
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    <div class="star-rating">
-        <span data-value="1" class="selected">&#9733;</span>
-        <span data-value="2">&#9733;</span>
-        <span data-value="3">&#9733;</span>
-        <span data-value="4">&#9733;</span>
-        <span data-value="5">&#9733;</span>
-    </div>
-    <p id="rating-value">Rating: 1</p>
-    <div class="rate-container">
-        {{ form.rate }}<br />
-    </div>
+    {% if form.rate.value != 1 %}
+        <div class="star-rating">
+            {% for i in "12345" %}
+            {% if forloop.counter <= review.rate %}
+            <span data-value="{{i}}" class="selected">&#9733;</span>
+            {% else %}
+            <span data-value="{{i}}">&#9733;</span>
+            {% endif %}
+        {% endfor %}
+        </div>
+        <p id="rating-value">Rating: {{form.rate.value}}</p>
+        <div class="rate-container">
+            {{ form.rate }}<br />
+        </div>
+    {% else %}
+        <div class="star-rating">
+            <span data-value="1" class="selected">&#9733;</span>
+            <span data-value="2">&#9733;</span>
+            <span data-value="3">&#9733;</span>
+            <span data-value="4">&#9733;</span>
+            <span data-value="5">&#9733;</span>
+        </div>
+        <p id="rating-value">Rating: 1</p>
+        <div class="rate-container">
+            {{ form.rate }}<br />
+        </div>
+    {% endif %}
     <div class="content-container">
         Content: <br />
         {{ form.comment }}
     </div>
-    <button type="submit">Create Review</button>
+    <button type="submit">Submit</button>
 </form>
 
 <script>

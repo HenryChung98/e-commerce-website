@@ -1,9 +1,11 @@
 .cart-item {
     display: flex;
     justify-content: space-between;
-    margin: 20px;
     padding: 10px;
-    border: 1px solid;
+    border-radius: 10px;
+    border: 1px solid rgb(118, 118, 118);
+    margin: 10px;
+    padding: 10px;
 }
 
 .cart-item-des {

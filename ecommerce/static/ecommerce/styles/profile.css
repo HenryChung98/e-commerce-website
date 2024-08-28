@@ -5,24 +5,27 @@ button {
     padding: 10px;
 }
 
-.ordered-container {
-    border: 1px solid;
+.ordered-container, .review-container {
+    border-radius: 10px;
+    padding: 10px;
 }
 .ordered-items {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 10px;
 }
 .ordered-item {
     flex: 1 1 calc(33.333% - 10px);
     display: flex;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-    border: 1px solid;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #bbbbbc;
+    border-radius: 10px;
 }
 .ordered-container img {
-    width: 300px;
+    width: 150px;
+    border-radius: 10px;
 }
 .item-des {
     display: flex;
@@ -30,11 +33,10 @@ button {
     margin-left: 20px;
 }
 
-.review-container {
-    border: 1px solid;
-}
 
 .review-item {
-    border: 1px solid;
+    border-radius: 10px;
+    border: 1px solid #bbbbbc;
     margin: 10px;
+    padding: 10px;
 }

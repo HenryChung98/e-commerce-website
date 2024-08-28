@@ -6,6 +6,10 @@
 .item-detail-box img {
     width: 600px;
     border-radius: 10px;
+    margin: 10px;
+}
+.item-desc {
+    margin: 10px;
 }
 
 .item-info-container {
@@ -19,4 +23,18 @@
     padding: 10px;
     font-size: 15px;
     border-radius: 10px;
+}
+
+.review-item {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    border: 1px solid rgb(118, 118, 118);
+    margin: 10px;
+    padding: 10px;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 10px;
 }

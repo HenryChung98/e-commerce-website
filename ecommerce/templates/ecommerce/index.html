@@ -16,10 +16,7 @@ href="{% static 'ecommerce/styles/itemList.css' %}"
 
 {% block content %}
 <img src="{% static 'ecommerce/assets/images/index-banner.jpg' %}" alt="index-banner" class="index-banner">
-{% if user.is_authenticated %}
 
-{% else %}
-{% endif %}
 <div class="item-box-container">
 {% for item in items %}
 <a href="{% url 'item-detail' item.id %}">
@@ -27,6 +24,11 @@ href="{% static 'ecommerce/styles/itemList.css' %}"
     <img src="{{item.image.url}}" alt="itemImg">
     <h3>${{item.price}}</h3>
     <h3>{{item.name}}</h3>    
+    <span style="color: gold;">&#9733;</span>
+    <span style="color: gold;">&#9733;</span>
+    <span style="color: gold;">&#9733;</span>
+    <span style="color: gold;">&#9733;</span>
+    <span style="color: gold;">&#9733;</span>
 </div>
 </a>
 {% endfor %}

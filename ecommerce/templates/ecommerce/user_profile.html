@@ -46,10 +46,16 @@
     <div class="review-container">
     {% if reviews %}
         {% for review in reviews %}
-        <a href="{% url 'item-detail' review.item.id %}">
+        <a href="{% url 'item-detail' review.item.id %}#review-{{review.id}}">
             <div class="review-item">
-                <h4>reviewed item: {{review.item}}</h4>
-                {{review.item.price}}
+                reviewed item: {{review.item}}
+                {% for i in "12345" %}
+                {% if forloop.counter <= review.rate %}
+                    <span style="color: gold;">&#9733;</span>
+                {% else %}
+                    <span style="color: lightgray;">&#9733;</span>
+                {% endif %}
+            {% endfor %}
             </div>
         </a>
         {% endfor %}

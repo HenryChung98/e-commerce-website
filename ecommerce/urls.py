@@ -19,6 +19,8 @@ urlpatterns = [
     path("items/<int:item_id>/", views.item_detail, name='item-detail'),
     path('items/<str:category>/', views.item_category, name='item-list'),
     path("items/<int:item_id>/review", views.create_review, name='create-review'),
+    path("items/<int:review_id>/edit/", views.ReviewUpdateView.as_view(), name='review-update'),
+    path("items/<int:review_id>/delete/", views.ReviewDeleteView.as_view(), name='review-delete'),
     
     # order
     path('order/', views.order_form, name='order-form'),

@@ -8,7 +8,8 @@
 
 .item-box {
     padding: 10px;
-    border: 1px solid;
+    border-radius: 10px;
+    border: 1px solid #bbbbbc;
 }
 
 .item-box img {
