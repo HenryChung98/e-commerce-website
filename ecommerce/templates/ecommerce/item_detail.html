@@ -6,58 +6,69 @@
 <link
 rel="stylesheet"
 type="text/css"
-href="{% static 'ecommerce/styles/itemDetail.css' %}"
+href="{% static 'ecommerce/styles/item_detail.css' %}"
 />
 {% endblock css %}
 
 {% block content %}
 <div class="item-detail">
-<div class="item-detail-box">
-    <img src="{{item.image.url}}" alt="itemImg">
-    <div class="item-info-container">
-        <h1>{{item.name}}</h1>
-        5
-        <hr style="border: 1px solid #000; width: 100%; margin: 20px 0;">
-        <h3>{{item.category}}</h3>
-        <h3>{{item.price}}</h3>
-        <form action="{% url 'add-to-cart' item.id %}" method="POST">
+    <div class="item-detail-box">
+        <img src="{{item.image.url}}" alt="itemImg">
+        <div class="item-info-container">
+            <h1>{{item.name}}</h1>
+            <hr style="border: 1px solid #000; width: 100%; margin: 20px 0;">
+            <h3>{{item.category}}</h3>
+            <h3>{{item.price}}</h3>
+            {% if user.is_authenticated%}
+            <form action="{% url 'add-to-cart' item.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="add-cart-btn" id="add-cart-btn">Add to Cart</button>
+            </form>
+            {% else %}
+                {% csrf_token %}
+                <a href="{% url 'account_login'%}"><button type="submit" class="add-cart-btn">Add to Cart</button></a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="item-desc">
+        <p>{{item.description}}</p>
+    </div>
+    <br />
+    {% if is_reviewed %}
+    <div class="buttons-container">
+        <a href="{% url 'review-update' my_review.id %}"><button>Edit Review</button></a>
+        <form action="{% url 'review-delete' my_review.id %}" method="post" onsubmit="return confirmDelete()">
             {% csrf_token %}
-            <button type="submit" class="add-cart-btn" id="add-cart-btn">Add to Cart</button>
+            <button type="submit">Delete Review</button>
         </form>
     </div>
-</div>
-<div class="item-desc">
-    <p>{{item.description}}</p>
-</div>
-<br />
-<a href="{% url 'create-review' item.id %}"><button>Create Review</button></a>
+    {% else %}
+        <a href="{% url 'create-review' item.id %}"><button>Create Review</button></a>
+    {% endif %}
     {% if reviews %}
-    <ul>
+        <ul>
         {% for review in reviews %}
-        <li class="review-item" id="review-{{review.id}}">
-        <div class="review-contents">
-            <strong>{{ review.user.nickname }}</strong><br>
-            {% for i in "12345" %}
-                {% if forloop.counter <= review.rate %}
-                    <span style="color: gold;">&#9733;</span>
-                {% else %}
-                    <span style="color: lightgray;">&#9733;</span>
-                {% endif %}
-            {% endfor %}
-            {{ review.createdAt.day }}/{{review.createdAt.month}}/{{review.createdAt.year}}<br />
-            {{ review.comment }}
-        </div>
-            {% if user.nickname == review.user.nickname %}
-            <div class="buttons-container">
-                <a href="{% url 'review-update' review.id%}"><button>edit</button></a>
-                <form action="{% url 'review-delete' review.id %}" method="post" onsubmit="return confirmDelete()">
-                    {% csrf_token %}
-                    <button type="submit">Delete</button>
-                </form>
-            </div>
+
+            {% if user.is_authenticated and user == review.user %}
+                <li class="review-item mine" id="review-{{review.id}}">
+            {% else %}
+                <li class="review-item" id="review-{{review.id}}">
             {% endif %}
-        </li>
-        <br />
+
+            <div class="review-contents">
+                <strong>{{ review.user.nickname }}</strong><br>
+                {% for i in "12345" %}
+                    {% if forloop.counter <= review.rate %}
+                        <span style="color: gold;">&#9733;</span>
+                    {% else %}
+                        <span style="color: lightgray;">&#9733;</span>
+                    {% endif %}
+                {% endfor %}
+                {{ review.createdAt.day }}/{{review.createdAt.month}}/{{review.createdAt.year}}<br />
+                {{ review.comment }}
+            </div> 
+            </li>
+            <br />
         {% endfor %}
     </ul>
     {% else %}

@@ -1,13 +1,13 @@
-{% extends "ecommerce_base/base_with_header.html" %}
 {% load static %}
 
 {% block css %}
 <link
 rel="stylesheet"
 type="text/css"
-href="{% static 'ecommerce/styles/itemList.css' %}"
+href="{% static 'ecommerce/styles/item_list.css' %}"
 />
 {% endblock css %}
+
 {% block content %}
 <div class="item-box-container">
 {% for item in items %}
@@ -32,6 +32,5 @@ href="{% static 'ecommerce/styles/itemList.css' %}"
 </div>
 </a>
 {% endfor %}
-
 </div>
 {% endblock content %}

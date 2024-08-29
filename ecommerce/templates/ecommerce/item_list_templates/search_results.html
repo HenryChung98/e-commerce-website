@@ -2,44 +2,12 @@
 
 {% load static %} 
 
-{% block css %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'ecommerce/styles/itemList.css' %}"
-/>
-{% endblock css %} 
-
 {% block content %}
-<div class="item-box-container">
+
   {% if items %}
-
-  <div class="item-box-container">
-    {% for item in items %}
-    <a href="{% url 'item-detail' item.id %}">
-      <div class="item-box">
-        <img src="{{item.image.url}}" alt="itemImg" />
-        <h3>${{item.price}}</h3>
-        <h3>{{item.name}}</h3>
-
-        {% for id, sum in review_avg.items %}
-        {% if id == item.id %}
-            {% for i in "12345" %}
-            {% if forloop.counter <= sum %}
-                <span style="color: gold;">&#9733;</span>
-            {% else %}
-                <span style="color: lightgray;">&#9733;</span>
-            {% endif %}
-            {% endfor %}
-        <h4>{{ sum }}</h4>
-        {% endif %}
-    {% endfor %}
-      </div>
-    </a>
-    {% endfor %}
-  </div>
+    {% include 'ecommerce/item_list_templates/item_list.html' %}
   {% else %}
-  <p>No results found</p>
+    <p>No results found</p>
   {% endif %}
-</div>
+
 {% endblock content %}
