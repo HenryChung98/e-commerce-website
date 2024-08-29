@@ -16,8 +16,22 @@ href="{% static 'ecommerce/styles/itemList.css' %}"
     <img src="{{item.image.url}}" alt="itemImg">
     <h3>${{item.price}}</h3>
     <h3>{{item.name}}</h3>    
+
+    {% for id, sum in review_avg.items %}
+    {% if id == item.id %}
+        {% for i in "12345" %}
+        {% if forloop.counter <= sum %}
+            <span style="color: gold;">&#9733;</span>
+        {% else %}
+            <span style="color: lightgray;">&#9733;</span>
+        {% endif %}
+        {% endfor %}
+    <h4>{{ sum }}</h4>
+    {% endif %}
+{% endfor %}
 </div>
 </a>
 {% endfor %}
+
 </div>
 {% endblock content %}

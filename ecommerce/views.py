@@ -11,7 +11,32 @@ from .forms import ReviewForm, OrderForm, PaymentForm, SignupForm
 
 def index(request):
     items = Item.objects.all()
-    context = {"items": items}
+    reviews = Review.objects.all()
+    
+    # ===== get review avg =====
+    review_sum = {}
+    review_num = {}
+    review_avg = {}
+    for item in items:
+        review_sum[item.id] = 0 
+        review_num[item.id] = 0 
+    
+    for review in reviews:
+        review_sum[review.item.id] += review.rate
+        review_num[review.item.id] += 1
+
+    for key in review_sum:
+        try:
+            review_avg[key] = float(review_sum[key]) / float(review_num[key])
+        except:
+            review_avg[key] = 0
+    # ===== get review avg =====
+
+    context = {
+        "items": items,
+        "reviews": reviews,
+        "review_avg": review_avg
+        }
     return render(request, "ecommerce/index.html", context)
 
 class CustomPasswordChangeView(PasswordChangeView):
@@ -22,7 +47,32 @@ class CustomPasswordChangeView(PasswordChangeView):
 # items 
 def item_list(request):
     items = Item.objects.all()
-    context = {"items": items}
+    reviews = Review.objects.all()
+
+    # ===== get review avg =====
+    review_sum = {}
+    review_num = {}
+    review_avg = {}
+    for item in items:
+        review_sum[item.id] = 0 
+        review_num[item.id] = 0 
+    
+    for review in reviews:
+        review_sum[review.item.id] += review.rate
+        review_num[review.item.id] += 1
+
+    for key in review_sum:
+        try:
+            review_avg[key] = float(review_sum[key]) / float(review_num[key])
+        except:
+            review_avg[key] = 0
+    # ===== get review avg =====
+
+    context = {
+        "items": items,
+        "reviews": reviews,
+        "review_avg": review_avg
+        }
     return render(request, "ecommerce/item_list_templates/item_list.html", context)
 
 def item_detail(request, item_id):
@@ -36,8 +86,37 @@ def item_detail(request, item_id):
 
 def search(request):
     query = request.GET.get('q')
-    results = Item.objects.filter(name__icontains=query)
-    return render(request, 'ecommerce/item_list_templates/search_results.html', {'results': results, 'query': query})
+    items = Item.objects.filter(name__icontains=query)
+    reviews = Review.objects.all()
+    
+    # ===== get review avg =====
+    review_sum = {}
+    review_num = {}
+    review_avg = {}
+    for item in items:
+        review_sum[item.id] = 0 
+        review_num[item.id] = 0 
+    
+    for review in reviews:
+        review_sum[review.item.id] += review.rate
+        review_num[review.item.id] += 1
+
+    for key in review_sum:
+        try:
+            review_avg[key] = float(review_sum[key]) / float(review_num[key])
+        except:
+            review_avg[key] = 0
+    # ===== get review avg =====
+
+    context = {
+        "items": items,
+        "reviews": reviews,
+        "review_avg": review_avg,
+        'query': query
+        }
+
+    
+    return render(request, 'ecommerce/item_list_templates/search_results.html', context)
 
 
 def item_category(request, category=None):
@@ -45,7 +124,33 @@ def item_category(request, category=None):
         items = Item.objects.filter(category=category)
     else:
         items = Item.objects.all()
-    return render(request, 'ecommerce/item_list_templates/item_category_results.html', {'items': items})
+
+    reviews = Review.objects.all()
+    # ===== get review avg =====
+    review_sum = {}
+    review_num = {}
+    review_avg = {}
+    for item in items:
+        review_sum[item.id] = 0 
+        review_num[item.id] = 0 
+    
+    for review in reviews:
+        review_sum[review.item.id] += review.rate
+        review_num[review.item.id] += 1
+
+    for key in review_sum:
+        try:
+            review_avg[key] = float(review_sum[key]) / float(review_num[key])
+        except:
+            review_avg[key] = 0
+    # ===== get review avg =====
+
+    context = {
+        "items": items,
+        "reviews": reviews,
+        "review_avg": review_avg
+        }
+    return render(request, 'ecommerce/item_list_templates/item_category_results.html', context)
 
 # cart
 @login_required
